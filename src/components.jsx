@@ -1,7 +1,12 @@
+// REUSABLE PIECES: Photo → Header → Footer → OrderLink → ProductCard → ProductGrid → PageIntro.
+// Components are functions that return JSX. Uppercase tags such as <Photo /> call them.
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { contact, instagram, orderForms } from "./data.js";
 
+// PHOTO: props are inputs from the parent, e.g. <Photo name="bearbuns" alt="..." />.
+// "name" selects a file in public/images; defaults apply when a prop is omitted.
+// eager=true loads promptly; otherwise the browser may wait until the photo is nearby.
 export function Photo({ name, alt, className = "", eager = false }) {
   return (
     <img
@@ -14,10 +19,14 @@ export function Photo({ name, alt, className = "", eager = false }) {
   );
 }
 
+// HEADER: shared logo/navigation. Look here to edit links or mobile-menu behavior.
 export function Header() {
+  // State remembers a value between renders; calling its setter requests a new render.
   const [menuOpen, setMenuOpen] = useState(false);
+  // A ref holds the actual button so Escape can return keyboard focus to it.
   const menuButton = useRef(null);
   const location = useLocation();
+  // An effect runs after rendering. This dependency makes it run when the URL path changes.
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
@@ -36,6 +45,7 @@ export function Header() {
         <Link className="wordmark" to="/" aria-label="G&G Bakery home">
           <Photo name="gglogo" alt="Original G&G Bakery bear logo" eager />
         </Link>
+        {/* Event handler: clicking flips menuOpen. The same state controls the label and CSS class. */}
         <button
           ref={menuButton}
           className="menu-toggle"
@@ -50,6 +60,7 @@ export function Header() {
           aria-label="Main navigation"
           className={menuOpen ? "navigation open" : "navigation"}
         >
+          {/* NavLink marks the current page active; ordinary Link just navigates within the app. */}
           <NavLink to="/" end>
             Home
           </NavLink>
@@ -66,6 +77,7 @@ export function Header() {
   );
 }
 
+// FOOTER: shared contact details and links. Their destinations come from data.js.
 export function Footer() {
   return (
     <footer className="footer">
@@ -95,12 +107,15 @@ export function Footer() {
   );
 }
 
+// ORDER LINK: pick a verified Google Form, or fall back to contacting the bakery.
+// The "form" prop is a key such as "bread", not the form's full URL.
 export function OrderLink({
   form = "custom",
   className = "button",
   label = "Order now",
 }) {
   const destination = orderForms[form];
+  // ?. safely checks the property even if the requested form key does not exist.
   if (destination?.verifiedActive)
     return (
       <a
@@ -119,6 +134,8 @@ export function OrderLink({
   );
 }
 
+// ONE PRODUCT: read the product prop and pass some of its fields to smaller components.
+// Edit this markup once to change every card rendered by ProductGrid.
 export function ProductCard({ product }) {
   return (
     <article className="product-card">
@@ -135,6 +152,8 @@ export function ProductCard({ product }) {
     </article>
   );
 }
+// PRODUCT LIST: map() transforms each data record into a ProductCard.
+// A stable key helps React match each card to its product when filtering changes the list.
 export function ProductGrid({ products }) {
   return (
     <div className="product-grid">
@@ -145,6 +164,8 @@ export function ProductGrid({ products }) {
   );
 }
 
+// PAGE INTRO: "children" is content written between <PageIntro> and </PageIntro>.
+// && displays optional content only when a value was provided.
 export function PageIntro({ eyebrow, title, children }) {
   return (
     <div className="page-intro">

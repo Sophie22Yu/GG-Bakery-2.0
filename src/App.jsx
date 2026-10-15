@@ -1,3 +1,5 @@
+// PAGE MAP: Home → Shop → Delivery → Events → About → NotFound → App (routing).
+// Edit page text/layout here, reusable pieces in components.jsx, and products in data.js.
 import { useEffect, useRef, useState } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import {
@@ -11,9 +13,11 @@ import {
 import Calendar from "./Calendar.jsx";
 import { products, categories, events, contact } from "./data.js";
 
+// HOME: composes existing components; the product list and calendar receive data as props.
 export function Home() {
   return (
     <>
+      {/* Home section 1: welcome text and the main bakery photo. */}
       <section className="hero">
         <div className="hero-copy">
           <h1>G&G Bakery</h1>
@@ -50,6 +54,7 @@ export function Home() {
             Shop ↗
           </Link>
         </div>
+        {/* Arrays start at index 0: these records are Tiramisu, Cake Pops, and Cupcakes. */}
         <ProductGrid products={[products[2], products[6], products[3]]} />
       </section>
       <section className="story-strip">
@@ -89,9 +94,14 @@ export function Home() {
   );
 }
 
+// SHOP: the main example of user input → state → filtered data → updated interface.
 export function Shop() {
+  // query stores the search text; category stores the dropdown choice.
+  // Setters such as setQuery tell React to render this component again with the new value.
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All treats");
+  // Keep a product only if BOTH conditions pass: category matches AND text matches.
+  // This is derived data, recalculated on each render; the original products array is unchanged.
   const matches = products.filter(
     (product) =>
       (category === "All treats" || product.category === category) &&
@@ -105,6 +115,7 @@ export function Shop() {
       <div className="shop-controls">
         <div className="search-field">
           <label htmlFor="product-search">Search products</label>
+          {/* Controlled input: value displays state; onChange saves what the user types. */}
           <input
             id="product-search"
             type="search"
@@ -125,6 +136,7 @@ export function Shop() {
             ))}
           </select>
         </div>
+        {/* Reset both inputs; matches is automatically recalculated from their new values. */}
         <button
           className="reset-button"
           onClick={() => {
@@ -138,6 +150,7 @@ export function Shop() {
       <p className="result-count" aria-live="polite">
         {matches.length} {matches.length === 1 ? "product" : "products"}
       </p>
+      {/* A ternary chooses the product grid when results exist, or the no-results message. */}
       {matches.length ? (
         <ProductGrid products={matches} />
       ) : (
@@ -163,6 +176,7 @@ export function Shop() {
   );
 }
 
+// DELIVERY: mostly static content. Map shape/spacing are controlled in styles.css.
 function Delivery() {
   return (
     <section className="section page-section">
@@ -201,6 +215,7 @@ function Delivery() {
     </section>
   );
 }
+// EVENTS: reuse the same calendar component shown on Home, with the same event records.
 function Events() {
   return (
     <section className="section page-section">
@@ -209,6 +224,7 @@ function Events() {
     </section>
   );
 }
+// ABOUT: the array below holds each team member's content; map() renders their cards.
 function About() {
   return (
     <section className="section page-section">
@@ -251,6 +267,7 @@ function About() {
     </section>
   );
 }
+// FALLBACK PAGE: shown when no URL path matches one of our five pages.
 function NotFound() {
   return (
     <section className="section not-found">
@@ -263,10 +280,13 @@ function NotFound() {
   );
 }
 
+// APP SHELL: always display Header/Footer; swap the page between them based on the URL.
 export default function App() {
   const location = useLocation();
+  // Refs remember DOM elements/values without triggering a render when changed.
   const main = useRef(null);
   const previousPath = useRef(location.pathname);
+  // Run after a path change: update the browser title, then move focus/scroll to the new page.
   useEffect(() => {
     const title =
       {
@@ -287,6 +307,7 @@ export default function App() {
     <>
       <Header />
       <main id="main" ref={main} tabIndex={-1}>
+        {/* Each Route connects a URL path to a component. * catches all unmatched paths. */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />

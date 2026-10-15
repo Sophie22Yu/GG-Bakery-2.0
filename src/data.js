@@ -1,3 +1,5 @@
+// CONTENT EDITS: change bakery information here rather than rewriting JSX layouts.
+// Exports let App.jsx and components.jsx import the same source of data.
 export const contact = "mailto:gg.bakery.service@gmail.com";
 export const instagram = "https://www.instagram.com/gg._.bakery_/";
 
@@ -15,6 +17,9 @@ export const orderForms = {
 };
 
 // Catalog descriptions come from the original app; listing a product does not promise availability.
+// To add a product, copy one record and give it a unique id.
+// image="bearbuns" means public/images/bearbuns.webp; alt describes that image.
+// form must match a key in orderForms above. The cards and filters use these records.
 export const products = [
   {
     id: "bear-buns",
@@ -82,6 +87,8 @@ export const products = [
     form: "custom",
   },
 ];
+// Build the dropdown from the products: map extracts categories, Set removes duplicates,
+// and ... spreads those unique values into an array after the "All treats" option.
 export const categories = [
   "All treats",
   ...new Set(products.map((product) => product.category)),

@@ -1,3 +1,6 @@
+/* STYLE MAP: use the numbered sections below to navigate.
+   JSX className="product-card" connects to the .product-card selector here. */
+/* 1. SITE DEFAULTS: fonts, colors, and shared variables. var(--red) uses the color below. */
 :root {
   font-family: "DM Sans", sans-serif;
   color: #533d32;
@@ -102,6 +105,7 @@ main:focus {
 .skip-link:focus {
   top: 10px;
 }
+/* 2. HEADER & NAVIGATION: shared layout and links; mobile rules are farther down. */
 .announcement {
   padding: 10px 5.6%;
   background: #eee3cd;
@@ -165,6 +169,7 @@ main:focus {
 .menu-toggle {
   display: none;
 }
+/* 3. HOME HERO: welcome text and the main image. Look for .hero-photo > img to change its shape. */
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -311,6 +316,7 @@ main:focus {
   color: var(--red);
   font-style: normal;
 }
+/* 4. SHARED SECTIONS & PRODUCT CARDS: grids, product photos, headings, and links. */
 .section {
   max-width: 1440px;
   padding: 76px 5.6%;
@@ -396,6 +402,7 @@ main:focus {
   text-align: center;
   margin: 30px 0 0;
 }
+/* 5. HOME MISSION SECTION: illustration and text arranged side by side on desktop. */
 .story-strip {
   padding: 65px 11%;
   background: #eee5d6;
@@ -427,6 +434,7 @@ main:focus {
   font-size: 0.86rem;
   color: var(--muted);
 }
+/* 6. CALENDAR: CSS arranges the dates; Calendar.jsx calculates dates and handles clicks. */
 .calendar-layout {
   display: grid;
   grid-template-columns: 1.25fr 1fr;
@@ -547,6 +555,7 @@ main:focus {
 .event-details article {
   padding-block: 8px;
 }
+/* 7. CONTACT SECTION & FOOTER: shared contact links and footer columns. */
 .contact-banner {
   padding: 45px 8%;
   display: flex;
@@ -615,6 +624,7 @@ main:focus {
   font-size: 0.59rem;
   color: #dfc9ba;
 }
+/* 8. INDIVIDUAL PAGES: intros, Shop filters, delivery map, and team photos. */
 .page-section {
   padding-top: 60px;
   min-height: 60vh;
@@ -782,6 +792,8 @@ main:focus {
 .not-found p:not(.eyebrow) {
   color: var(--muted);
 }
+/* 9. RESPONSIVE RULES: @media applies styles only when the screen matches its condition.
+   Later matching rules can override earlier styles. Start here for phone/tablet layout changes. */
 @media (min-width: 1500px) {
   .header,
   .announcement,
@@ -1087,6 +1099,7 @@ main:focus {
     font-size: 0.7rem;
   }
 }
+/* 10. ACCESSIBILITY: remove animation for people who request reduced motion. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1096,7 +1109,8 @@ main:focus {
   }
 }
 
-/* Original logo artwork, shown without redrawing or changing its lettering. */
+/* 11. ORIGINAL BRANDING OVERRIDES: final logo sizing and page adjustments.
+   Original logo artwork is displayed without redrawing or changing its lettering. */
 .wordmark {
   display: block;
   position: relative;
