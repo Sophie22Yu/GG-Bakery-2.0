@@ -48,7 +48,7 @@ Before setting any order form's `verifiedActive` field to `true`, open it as a c
 1. Push this project to the new 2.0 GitHub repository; leave the original repository and Streamlit deployment intact.
 2. In Netlify, import that repository and select the Free plan.
 3. Set the build command to `npm run build`, publish directory to `dist`, and Node version to `24`.
-4. `netlify.toml` provides the single-page-app route fallback. Do not enable Netlify Forms or paid add-ons; no environment secrets are needed.
+4. `public/_redirects` is copied into `dist/` and provides the single-page-app route fallback, including for manual uploads. `netlify.toml` supplies the build settings. Do not enable Netlify Forms or paid add-ons; no environment secrets are needed.
 5. Use the assigned `netlify.app` address; purchasing a domain is unnecessary.
 6. Check every route and refresh `/shop` while signed out. Check images, search, calendar controls, mobile navigation, and ordering/contact links.
 
