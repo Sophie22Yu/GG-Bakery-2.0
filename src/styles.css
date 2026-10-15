@@ -810,7 +810,7 @@ main:focus {
     flex-wrap: wrap;
     gap: 18px;
   }
-  
+
   .photo-sticker {
     width: 105px;
     height: 105px;
@@ -899,8 +899,7 @@ main:focus {
   }
   .hero-photo > img {
     border-radius: 16px;
-  
-}
+  }
   .photo-sticker {
     bottom: 55px;
     left: -15px;
@@ -1056,7 +1055,6 @@ main:focus {
   }
 }
 @media (max-width: 400px) {
-  
   .product-grid {
     grid-template-columns: 1fr;
   }
@@ -1149,7 +1147,7 @@ main:focus {
     left: -38px;
     top: -25px;
   }
-  
+
   .hero h1 {
     font-size: 4.6rem;
   }
