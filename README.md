@@ -1,6 +1,8 @@
 # G&G Bakery Website 2.0
 
-A React rebuild of [G&G Bakery's original Streamlit website](https://github.com/Sophie22Yu/GG-Bakery-Website). The bakery's photos, warm colors, and handwritten visual direction are retained; the interface is rebuilt as reusable React components.
+A React rebuild of the [G&G Bakery original Streamlit website](https://github.com/Sophie22Yu/GG-Bakery-Website). 
+
+The interface is rebuilt as reusable React components.
 
 ## Run locally
 
